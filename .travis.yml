@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true ballenon/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "dockerCI"
+  env: "Dockerci-env"
+  bucket_name: "elasticbeanstalk-us-west-2-803510605055"
+  bucket_path: "dockerCI"
+  on:
+    branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
